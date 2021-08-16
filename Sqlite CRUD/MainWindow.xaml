@@ -1,0 +1,64 @@
+﻿<Window x:Class="Sqlite_CRUD.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sqlite_CRUD"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid  >
+
+        <ListView Name="ItemList" Margin="5,20,5,0" Height="195" VerticalAlignment="Top">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Clear" Click="MenuItem_Click"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="30"  DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Address" Width="150" DisplayMemberBinding="{Binding Address}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <CheckBox x:Name="EnableCheckBox" Content="Edit"  HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top"/>
+
+        <Grid x:Name="EditGrid" IsEnabled="{Binding ElementName=EnableCheckBox,Path=IsChecked}" Margin="3,260,0,0"  HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Label Content="Name" HorizontalAlignment="Left" Margin="3,0,0,0"   VerticalAlignment="Top"/>
+            <Label Content="Address" HorizontalAlignment="Left" Margin="3,40,0,0" VerticalAlignment="Top"/>
+            <TextBox Name="NameTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Name,Mode=OneWay}" HorizontalAlignment="Left"  Margin="70,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="AddressTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Address,Mode=OneWay}" HorizontalAlignment="Left" Margin="70,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+        </Grid>
+       
+        <Button x:Name="CreateButton" HorizontalAlignment="Left" Click="CreateButton_Click" Margin="10,360,0,0" VerticalAlignment="Top" >
+            <StackPanel Orientation="Horizontal">
+                <Path Stretch="Uniform"  Data="M 402.34375 587.59375 C 402.08783 587.59375 401.8515 587.71099 401.65625 587.90625 L 400.78125 588.78125 C 399.66615 588.24854 398.2986 588.42011 397.375 589.34375 L 386.75 599.96875 L 392.40625 605.625 L 403.03125 595 C 403.95495 594.07636 404.12645 592.70888 403.59375 591.59375 L 404.46875 590.71875 C 404.85925 590.32823 404.85925 589.70302 404.46875 589.3125 L 403.0625 587.90625 C 402.86725 587.71099 402.59967 587.59375 402.34375 587.59375 z M 399.46875 590.46875 C 399.72467 590.46875 399.99225 590.58599 400.1875 590.78125 L 401.59375 592.1875 C 401.98435 592.57803 401.98435 593.20322 401.59375 593.59375 L 400.625 594.59375 L 397.78125 591.75 L 398.78125 590.78125 C 398.9765 590.58599 399.21283 590.46875 399.46875 590.46875 z M 395.96875 593.5625 L 398.78125 596.40625 L 392.40625 602.78125 L 389.59375 599.96875 L 395.96875 593.5625 z M 385.9375 600.78125 L 383.8125 608.5625 L 391.59375 606.4375 L 385.9375 600.78125 z " Fill="#FF17314F" Width="15" Height="15" Margin="3,0,0,0"/>
+                <Label Content="Create"/>
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="ReadButton"  HorizontalAlignment="Left" Click="ReadButton_Click" Margin="90,360,0,0" VerticalAlignment="Top" Width="70" >
+            <StackPanel Orientation="Horizontal">
+                <Path Stretch="Uniform" Data="M 399.5625 598.46875 C 397.90565 598.46875 396.5625 599.8119 396.5625 601.46875 L 396.5625 615.46875 C 396.5625 617.12565 397.90565 618.46875 399.5625 618.46875 L 411.5625 618.46875 C 413.2194 618.46875 414.5625 617.12565 414.5625 615.46875 L 414.5625 605.46875 C 414.5625 601.60276 411.4285 598.46875 407.5625 598.46875 L 399.5625 598.46875 z M 399.5625 600.46875 L 406.5625 600.46875 L 406.5625 605.46875 L 412.5625 605.46875 L 412.5625 615.46875 C 412.5625 616.02105 412.1148 616.46875 411.5625 616.46875 L 399.5625 616.46875 C 399.01022 616.46875 398.5625 616.02105 398.5625 615.46875 L 398.5625 601.46875 C 398.5625 600.91647 399.01022 600.46875 399.5625 600.46875 z M 408.5625 600.5625 C 410.1738 600.88958 411.51355 601.99781 412.15625 603.46875 L 408.5625 603.46875 L 408.5625 600.5625 z M 400.5625 604.46875 L 400.5625 606.46875 L 404.5625 606.46875 L 404.5625 604.46875 L 400.5625 604.46875 z M 400.5625 608.46875 L 400.5625 610.46875 L 410.5625 610.46875 L 410.5625 608.46875 L 400.5625 608.46875 z M 400.5625 612.46875 L 400.5625 614.46875 L 410.5625 614.46875 L 410.5625 612.46875 L 400.5625 612.46875 z " Fill="#FF17314F" Width="15" Height="15" Margin="3,0,0,0"/>
+                <Label Content="Read"/>
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="UpdateButton" HorizontalAlignment="Left" Click="UpdateButton_Click" Margin="170,360,0,0" VerticalAlignment="Top" >
+            <StackPanel Orientation="Horizontal">
+                <Path Stretch="Uniform" Data="M 405.625 587.625 L 403.8125 594.3125 L 410.5 592.53125 L 408.96875 591 C 411.62184 589.56391 415.0078 589.94525 417.25 592.1875 L 418.65625 590.78125 C 415.62765 587.75259 410.97718 587.34026 407.5 589.53125 L 405.625 587.625 z M 418.6875 597.03125 L 412 598.84375 L 413.53125 600.375 C 410.87815 601.811 407.49225 601.39855 405.25 599.15625 L 403.84375 600.5625 C 406.87241 603.5912 411.5229 604.03475 415 601.84375 L 416.90625 603.71875 L 418.6875 597.03125 z " Fill="#FF17314F" Width="15" Height="15" Margin="3,0,0,0"/>
+                <Label Content="Update"/>
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="DeleteButton" HorizontalAlignment="Left" Margin="250,360,0,0" Click="DeleteButton_Click" VerticalAlignment="Top" >
+            <StackPanel Orientation="Horizontal">
+                <Path Stretch="Uniform"  Data="M 364.71875 605.21875 C 363.61418 605.21875 362.71875 606.11418 362.71875 607.21875 L 362.71875 608.21875 L 359.71875 608.21875 C 359.16647 608.21875 358.71875 608.66647 358.71875 609.21875 C 358.71875 609.77103 359.16647 610.21875 359.71875 610.21875 L 360.71875 610.21875 L 360.71875 621.21875 C 360.71875 622.87565 362.0619 624.21875 363.71875 624.21875 L 371.71875 624.21875 C 373.37565 624.21875 374.71875 622.87565 374.71875 621.21875 L 374.71875 610.21875 L 375.71875 610.21875 C 376.27105 610.21875 376.71875 609.77103 376.71875 609.21875 C 376.71875 608.66647 376.27105 608.21875 375.71875 608.21875 L 372.71875 608.21875 L 372.71875 607.21875 C 372.71875 606.11418 371.82335 605.21875 370.71875 605.21875 L 364.71875 605.21875 z M 364.71875 607.21875 L 370.71875 607.21875 L 370.71875 608.21875 L 364.71875 608.21875 L 364.71875 607.21875 z M 362.71875 610.21875 L 372.71875 610.21875 L 372.71875 621.21875 C 372.71875 621.77105 372.27105 622.21875 371.71875 622.21875 L 363.71875 622.21875 C 363.16647 622.21875 362.71875 621.77105 362.71875 621.21875 L 362.71875 610.21875 z M 364.71875 612.21875 L 364.71875 620.21875 L 366.71875 620.21875 L 366.71875 612.21875 L 364.71875 612.21875 z M 368.71875 612.21875 L 368.71875 620.21875 L 370.71875 620.21875 L 370.71875 612.21875 L 368.71875 612.21875 z " Fill="#FF17314F" Width="15" Height="15" Margin="3,0,0,0"/>
+                <Label Content="Delete"/>
+            </StackPanel>
+        </Button>
+
+    </Grid>
+</Window>
